@@ -90,4 +90,8 @@ foreach (new RecursiveIteratorIterator($iterator) as $file) {
     }
 }
 
+if ($valid) {
+    echo 'Success! ', chr(9), 'No "use"-statements inappropriate in the context of DDD could be found.';
+}
+
 return $valid;
