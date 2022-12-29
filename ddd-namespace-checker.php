@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-include __DIR__ . '/vendor/autoload.php';
-
 $valid = true;
 
 $slash = DIRECTORY_SEPARATOR;
@@ -40,23 +38,25 @@ foreach (new RecursiveIteratorIterator($iterator) as $file) {
         }
 
         $namespace = match (true) {
-            str_contains($fullNamespace, 'namespace ' . $prefix . 'Domain') => 'Domain',
             str_contains($fullNamespace, 'namespace ' . $prefix . 'Infrastructure') => 'Infrastructure',
-            default => 'App'
+            str_contains($fullNamespace, 'namespace ' . $prefix . 'App') => 'App',
+            str_contains($fullNamespace, 'namespace ' . $prefix . 'Domain') => 'Domain',
+            default => 'continue'
         };
-        if ($namespace === 'App') {
+        if ($namespace === 'continue') {
             continue;
         }
 
         $useStatements = [];
         foreach ($fileContent as $line) {
             $short = match (true) {
-                str_contains($line, 'use ' . $prefix . 'Domain') => 'Domain',
+                str_contains($line, 'use ' . $prefix . 'Infrastructure') => 'Infrastructure',
                 str_contains($line, 'use ' . $prefix . 'App') => 'App',
-                default => 'Infrastructure'
+                str_contains($line, 'use ' . $prefix . 'Domain') => 'Domain',
+                default => 'continue'
             };
 
-            if ($namespace === 'Infrastructure') {
+            if ($short === 'continue') {
                 continue;
             }
 
@@ -70,8 +70,9 @@ foreach (new RecursiveIteratorIterator($iterator) as $file) {
         }
 
         $taboos = match ($namespace) {
-            'Domain' => ['App'],
-            'Infrastructure' => ['App', 'Domain'],
+            'Infrastructure' => ['Domain'],
+            'App' => ['Infrastructure'],
+            'Domain' => ['App', 'Infrastructure'],
         };
 
         $first = true;
