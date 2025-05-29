@@ -4,21 +4,31 @@ import json
 
 
 """
+
 === Requirements ===
 
 - python (obviously)
 - mkvmerge
 - mkvpropedit
 
+
+=== Purpose ===
+
+This script sets the default track
+for subtitle and audio language
+and removes the default flag for
+all other tracks. For details
+see the config block below. 
+
 """
 
 
 # === Config ===
-DRY_RUN = True          # Set to False to actually modify files
+DRY_RUN = True                  # Set to False to actually modify files
 DIRECTORY = r"C:\path\to\your\directory"
 FILE_EXTENSION = ".mkv"
 DESIRED_SUBTITLE_TRACK_TITLE = ""
-DESIRED_AUDIO_LANG = "jpn"
+DESIRED_AUDIO_LANG = "jpn"      #  must be ISO 639-2
 
 
 class Operations:
