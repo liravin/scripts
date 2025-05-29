@@ -3,6 +3,16 @@ import subprocess
 import json
 
 
+"""
+=== Requirements ===
+
+- python (obviously)
+- mkvmerge
+- mkvpropedit
+
+"""
+
+
 # === Config ===
 DRY_RUN = True          # Set to False to actually modify files
 DIRECTORY = r"C:\path\to\your\directory"
