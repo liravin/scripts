@@ -81,7 +81,7 @@ def analyze_tracks(tracks: list) -> dict:
         type_ = track.get("type", "")
 
         if type_ == "audio":
-            if props.get("language") == DESIRED_LANG and audio_is_set is False:
+            if props.get("language") == DESIRED_AUDIO_LANG and audio_is_set is False:
                 track["operation"] = Operations.SET
                 result["audio"].append(track)
                 audio_is_set = True
