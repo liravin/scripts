@@ -7,7 +7,7 @@ import json
 DRY_RUN = True          # Set to False to actually modify files
 DIRECTORY = r"C:\path\to\your\directory"
 FILE_EXTENSION = ".mkv"
-DESIRED_SUBS = ""       # subtitle track name goes here
+DESIRED_SUBTITLE_TRACK_TITLE = ""
 DESIRED_AUDIO_LANG = "jpn"
 
 
@@ -90,7 +90,7 @@ def analyze_tracks(tracks: list) -> dict:
                 result["subtitles"].append(track)
 
         elif type_ == "subtitles":
-            if props.get("track_name", "") == DESIRED_SUBS:
+            if props.get("track_name", "") == DESIRED_SUBTITLE_TRACK_TITLE:
                 track["operation"] = Operations.SET
                 result["subtitles"].append(track)
             else:
