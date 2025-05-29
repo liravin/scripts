@@ -85,6 +85,7 @@ def analyze_tracks(tracks: list) -> dict:
         "subtitles": [],
     }
     audio_is_set: bool = False
+    subtitle_is_set: bool = False
 
     for track in tracks:
         props = track.get("properties", {})
@@ -100,9 +101,10 @@ def analyze_tracks(tracks: list) -> dict:
                 result["subtitles"].append(track)
 
         elif type_ == "subtitles":
-            if props.get("track_name", "") == DESIRED_SUBTITLE_TRACK_TITLE:
+            if props.get("track_name", "") == DESIRED_SUBTITLE_TRACK_TITLE and subtitle_is_set is False:
                 track["operation"] = Operations.SET
                 result["subtitles"].append(track)
+                subtitle_is_set = True
             else:
                 track["operation"] = Operations.UNSET
                 result["subtitles"].append(track)
