@@ -28,7 +28,7 @@ DRY_RUN = True                  # Set to False to actually modify files
 DIRECTORY = r"C:\path\to\your\directory"
 FILE_EXTENSION = ".mkv"
 DESIRED_SUBTITLE_TRACK_TITLE = ""
-DESIRED_AUDIO_LANG = "jpn"      #  must be ISO 639-2
+DESIRED_AUDIO_LANG = "jpn"      #  must be ISO 639-2 | https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
 
 
 class Operations:
